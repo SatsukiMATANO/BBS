@@ -1,0 +1,11 @@
+CREATE TABLE bbs.user
+(id INTEGER AUTO_INCREMENT PRIMARY KEY
+,login_id VARCHAR(20) UNIQUE NOT NULL
+,password VARCHAR(5000)NOT NULL
+,name VARCHAR(10)
+,branch_id INT(100)
+,department_id INT(100)
+,insert_date TIMESTAMP NOT NULL
+,update_date TIMESTAMP NOT NULL
+,stoped TINYINT(2)NOT NULL
+);
