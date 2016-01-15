@@ -27,19 +27,29 @@ public class UserSettingServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String settingId = request.getParameter("user_id");
-		int setUser = Integer.parseInt(settingId);
-
-		User editUser = new UserService().getUser(setUser);
-		request.setAttribute("editUser", editUser);
 		
-		List<Branch> branchs = new BranchService().getBranch();
-    	List<Department> departments = new DepartmentService().getDepartment();
-    	
-    	request.setAttribute("branchs", branchs);
-    	request.setAttribute("departments", departments);
-		request.getRequestDispatcher("usersetting.jsp").forward(request, response);
+		String settingId = request.getParameter("user_id");
+		try{
+			int setUser = Integer.parseInt(settingId);
+			User editUser = new UserService().getUser(setUser);
+			if(editUser == null){
+				response.sendRedirect("./usermanagement");
+				return;
+			}
+			
+			request.setAttribute("editUser", editUser);
+			
+			List<Branch> branchs = new BranchService().getBranch();
+	    	List<Department> departments = new DepartmentService().getDepartment();
+	    	
+	    	request.setAttribute("branchs", branchs);
+	    	request.setAttribute("departments", departments);
+			request.getRequestDispatcher("usersetting.jsp").forward(request, response);
+			
+		} catch (NumberFormatException e){
+			response.sendRedirect("./usermanagement");
+			return;
+		}
 	}
 	
 	@Override
@@ -130,6 +140,10 @@ public class UserSettingServlet extends HttpServlet {
 			}
 			if (password.length() < 6){
 				messages.add("パスワードは6文字以上で入力してください。");
+			}
+			if (!password.matches("(?!^[^0-9]*$)(?!^[^A-Za-z]*$)"
+					+ "(?!^[^(\\!-\\/|:-@|\\[-`|{-~]*$)^([\\!-~]+)$" )){
+				messages.add("パスワードは半角英数字・記号をそれぞれ必ず含んでください。");
 			}
 			
 			if(StringUtils.isEmpty(passwordcheck) == true){

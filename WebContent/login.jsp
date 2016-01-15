@@ -11,7 +11,7 @@
 <body>
 
 <div class="main-contents">
-
+<h3>ログイン</h3>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>

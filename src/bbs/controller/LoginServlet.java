@@ -36,11 +36,12 @@ public class LoginServlet extends HttpServlet {
 		
 		LoginService loginService = new LoginService();
 		User user = loginService.login(login_id, password);
-		
 		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", user);
+		
 		if(user != null){
 			
-			session.setAttribute("loginUser", user);
+			request.setAttribute("loginUser", user);
 			response.sendRedirect("./");
 		} else {
 			

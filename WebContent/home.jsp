@@ -28,6 +28,7 @@ function deleteCheck(){
 </head>
 <body>
 <div class="mail-contents">
+<h3>ホーム</h3>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -67,9 +68,8 @@ function deleteCheck(){
 			<a href="./">全件表示</a>
 	</c:if>
 </div>
+
 <c:if test="${ not empty loginUser }">
-
-
 <div class="post">
 	<c:forEach items="${posts}" var="post">
 	<hr size=2 color=#999999>
@@ -126,8 +126,7 @@ function deleteCheck(){
 			<label for="text">コメント</label><font size=2>(500文字以下)</font><br/>
 			<textarea name="text" cols="50" rows="5" class="text-box"><c:out value="${entryComment.text}"/></textarea><br/>
 			<input type="submit" value="コメントする">
-		</form>
-			
+		</form>		
 	</c:forEach>
 </div>
 </c:if>

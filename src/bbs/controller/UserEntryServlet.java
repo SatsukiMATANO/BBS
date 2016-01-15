@@ -119,6 +119,10 @@ public class UserEntryServlet extends HttpServlet {
 			if (password.length() < 6){
 				messages.add("パスワードは6文字以上で入力してください。");
 			}
+			if (!password.matches("(?!^[^0-9]*$)(?!^[^A-Za-z]*$)"
+					+ "(?!^[^(\\!-\\/|:-@|\\[-`|{-~]*$)^([\\!-~]+)$" )){
+				messages.add("パスワードは半角英数字・記号をそれぞれ必ず含んでください。");
+			}
 		}
 		if (StringUtils.isEmpty(passwordcheck) == true){
 			messages.add("確認用のパスワードを入力してください。");

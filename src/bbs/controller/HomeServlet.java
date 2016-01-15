@@ -30,6 +30,7 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
 		List<UserComment> comment = new CommentService().getComment();
 		List<Category> categorys = new PostService().getCategory();	
 		
@@ -52,6 +53,8 @@ public class HomeServlet extends HttpServlet {
 		List<UserPost> post =
 				new PostService().getDatePost(start_date, end_date, select_cate);
 		
+		User user = (User) session.getAttribute("loginUser");
+		request.setAttribute("loginUser", user);
 		request.setAttribute("posts", post);
 		request.setAttribute("categorys", categorys);
 		request.setAttribute("comments", comment);

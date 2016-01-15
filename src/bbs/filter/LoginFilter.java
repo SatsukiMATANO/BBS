@@ -16,21 +16,30 @@ import javax.servlet.http.HttpSession;
 import bbs.beans.User;
 
 
-@WebFilter({"/newpost","/userentry","/usermanagement", "/usersetting", "/index.jsp"})
+@WebFilter({"/*"})
 public class LoginFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		
-		HttpSession session = ((HttpServletRequest)request).getSession();
-    	User user = (User) session.getAttribute("loginUser");
-    	if(user == null){
-    		((HttpServletResponse)response).sendRedirect("./login");
-    		System.out.println("filter");
-    		return;
-    	}
-			chain.doFilter(request, response);
+		StringBuffer requestUrl = ((HttpServletRequest)request).getRequestURL();
+		String requestUrlStr = requestUrl.toString();
+		String[] urlParts = requestUrlStr.split("/");
+		String method = urlParts[urlParts.length -1];
+
+		//loginサーブレットはフィルターを除外する
+		if(!method.equals("login")){
+			HttpSession session = ((HttpServletRequest)request).getSession();
+	    	User loginUser = (User) session.getAttribute("loginUser");
+
+	    	if(loginUser == null){
+	    		((HttpServletResponse)response).sendRedirect("./login");
+	    		return;
+	    	}
+		}
+    	
+		chain.doFilter(request, response);
 	}
 
 	@Override

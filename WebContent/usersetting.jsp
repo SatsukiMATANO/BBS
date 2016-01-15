@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="main-contents">
+<h3>ユーザー編集</h3>
 <c:if test="${ not empty loginUser }">
 <c:if test="${not empty errorMessages}">
 	<div class="errorMessages">
@@ -38,7 +39,7 @@
 	
 	<label for="password">パスワード</label>
 	<font size = 2><font color =red>
-	（新しく更新する場合は6文字以上で入力してください）</font></font><br/>
+	（新しく更新する場合は半角英語・数字・記号を含む6文字以上で入力してください）</font></font><br/>
 	<input name="password" type="password" id="password"/><br />
 	
 	<label for="passwordcheck">パスワードの確認</label>

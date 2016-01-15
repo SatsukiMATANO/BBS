@@ -12,6 +12,7 @@
 <body>
 <div class =main-contents>
 <c:if test="${ not empty loginUser }">
+<h3>ユーザー登録</h3>
 <c:if test="${not empty errorMessages}">
 	<div class="errorMessages">
 		<ul>
@@ -39,7 +40,7 @@
 	
 	<label for="password">パスワード</label>
 	<font size = 2><font color =red>
-	※必須（6文字以上で入力してください）</font></font><br/>
+	※必須（半角英語・数字・記号を含む6文字以上で入力してください）</font></font><br/>
 	<input name="password" type="password" id="password"/>
 	<br/>
 	
@@ -53,14 +54,12 @@
 	
 	<label for="branch_id">支店</label><br/>
 	<select id="sel1" name="branch_id">
-
 		<c:forEach items="${branchs}" var="branch" >
 			<option value="${branch.id}"
 			<c:if test="${entryUser.branch_id == branch.id}">
 			selected="${entryUser.branch_id}"</c:if>>
 			${branch.branchname}</option>
 		</c:forEach>
-
 	</select><br/>
 	
 	<%-- toDo連動･･･支店別にプルダウン　--%>
@@ -72,11 +71,10 @@
 			selected="${entryUser.department_id}"</c:if>>
 			${department.departmentname }</option>
 		</c:forEach>
-	</select>
-	<br/>
+	</select><br/>
 
-	<br/><input type="submit" value="登録" /> <br/><br/>
-	<a href="usermanagement">戻る</a>
+	<br/><input type="submit" value="登録" /><br/><br/>
+	<a href="usermanagement">ユーザー管理へ戻る</a>
 </form>
 </c:if>
 </div>

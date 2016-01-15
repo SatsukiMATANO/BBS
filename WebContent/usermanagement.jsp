@@ -43,12 +43,14 @@ function deleteCheck(){
 <body>
 <div class="main-contents">
 <c:if test="${ not empty loginUser }">
-<a href="userentry">ユーザー新規登録</a><br/><br/>
+<h3>ユーザー管理</h3>
 
-<font color = grey><font size = 2>
-<br/>社員氏名を選択すると該当ユーザーの情報編集画面へ遷移します。<br/>
-</font></font>
-
+	<a href="userentry">ユーザー新規登録</a><br/><br/>
+	<font color = grey><font size = 2>
+	<br/>社員氏名を選択すると該当ユーザーの情報編集画面へ遷移します。<br/>
+	</font></font>
+	
+	<div class="user">
 	<table border = "1">
 		<tr>
 			<th>ログインID</th>
@@ -59,18 +61,16 @@ function deleteCheck(){
 			<th>削除</th>
 		</tr>
 		<c:forEach items="${users}" var="user">
-		
 		<tr>
-		<div class="user">
 			<td>
 				<span class="login_id"><c:out value="${user.login_id}" />
 				</span>
 			</td>
 			<td>
-					<span class="name">
-					<a href = "usersetting?user_id=${user.id}"><c:out value="${user.name}" />
-					</a>
-					</span>
+				<span class="name">
+				<a href = "usersetting?user_id=${user.id}">
+				<c:out value="${user.name}" /></a>
+				</span>
 			</td>
 			<td>
 				<span class="branchname">
@@ -82,7 +82,8 @@ function deleteCheck(){
 				<span class="departmentname">
 				<c:forEach items="${departments}" var="department">
 				<c:if test="${user.department_id == department.id}">
-				<c:out value="${department.departmentname}"/></c:if></c:forEach></span>
+				<c:out value="${department.departmentname}"/>
+				</c:if></c:forEach></span>
 			</td>
 			<th>
 				<!-- loginUserと管理ユーザーは停止・復活ボタンを非表示にする -->
@@ -101,30 +102,26 @@ function deleteCheck(){
 							<input name="stoped" type="hidden" value=0 id="stoped">
 							<input type="submit" value="復活する">
 							</c:if></c:if></c:if>
-							
 					</span>
 				</form>
 			</th>
 			<th>
-			<!-- loginUserと管理ユーザーは削除ボタンを非表示にする -->
-			<c:if test="${loginUser.id != user.id}">
-			<c:if test="${user.id != 1}">
-				<form action="usermanagement" method="post" onSubmit="return deleteCheck()">
-					<input name="id" type=hidden value="${user.id}" id="id"/>
-					<span class="delete">
-					<input name="delete" type="hidden" value="delete" id="delete">
-					<input type="submit" value="削除する">
-					</span>
-				</form>
-			</c:if></c:if>
+				<!-- loginUserと管理ユーザーは削除ボタンを非表示にする -->
+				<c:if test="${loginUser.id != user.id}">
+				<c:if test="${user.id != 1}">
+					<form action="usermanagement" method="post" onSubmit="return deleteCheck()">
+						<input name="id" type=hidden value="${user.id}" id="id"/>
+						<span class="delete">
+						<input name="delete" type="hidden" value="delete" id="delete">
+						<input type="submit" value="削除する">
+						</span>
+					</form>
+				</c:if></c:if>
 			</th>
-		</div>
 		</tr>
 		</c:forEach>
-		
 	</table>
-
-
+	</div>
 
 <br/><a href="./">ホームへ戻る</a>
 </c:if>
