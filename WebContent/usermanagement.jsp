@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー管理</title>
+<link href="css/BBS.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
 <!--
@@ -44,8 +45,8 @@ function deleteCheck(){
 <div class="main-contents">
 <c:if test="${ not empty loginUser }">
 <h3>ユーザー管理</h3>
-
-	<a href="userentry">ユーザー新規登録</a><br/><br/>
+	<a href="userentry">ユーザー新規登録</a><br/>
+	<a href="./">ホームへ戻る</a><br/><br/>
 	<font color = grey><font size = 2>
 	<br/>社員氏名を選択すると該当ユーザーの情報編集画面へ遷移します。<br/>
 	</font></font>
@@ -122,8 +123,6 @@ function deleteCheck(){
 		</c:forEach>
 	</table>
 	</div>
-
-<br/><a href="./">ホームへ戻る</a>
 </c:if>
 </div>
 </body>

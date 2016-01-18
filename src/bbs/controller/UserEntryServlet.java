@@ -106,7 +106,7 @@ public class UserEntryServlet extends HttpServlet {
 			}
 			if (checkLoginId != null){
 				messages.add("すでに登録されているログインIDを入力しています。"
-						+ "違うログインIDを入力してください。");
+						+ "異なるログインIDを入力してください。");
 			}
 
 		}
@@ -114,7 +114,7 @@ public class UserEntryServlet extends HttpServlet {
 			messages.add("パスワードを入力してください。");
 		} else {
 			if (password.length() > 255){
-				messages.add("パスワードは255文字以内で入力してください");
+				messages.add("パスワードは255文字以内で入力してください。");
 			}
 			if (password.length() < 6){
 				messages.add("パスワードは6文字以上で入力してください。");
@@ -128,7 +128,7 @@ public class UserEntryServlet extends HttpServlet {
 			messages.add("確認用のパスワードを入力してください。");
 		}
 		if (!passwordcheck.equals(password)){
-			messages.add("確認用のパスワードがパスワードと異なります。再度入力してください");
+			messages.add("確認用のパスワードがパスワードと異なります。再度入力してください。");
 		}
 		
 

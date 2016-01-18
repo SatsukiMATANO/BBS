@@ -22,7 +22,7 @@ public class UserPostDao {
 		try{
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM user_post ");
-			sql.append("ORDER BY insert_date DESC limit " + num);
+			sql.append("ORDER BY update_date DESC limit " + num);
 			
 			ps = connection.prepareStatement(sql.toString());
 			
@@ -85,7 +85,7 @@ public class UserPostDao {
 			if(category != ""){
 				sql.append(" AND category = ?");
 			}
-			sql.append(" ORDER BY insert_date DESC limit " + num);
+			sql.append(" ORDER BY update_date DESC limit " + num);
 			
 			ps = connection.prepareStatement(sql.toString());
 

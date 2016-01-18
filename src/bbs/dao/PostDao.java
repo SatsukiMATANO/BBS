@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import bbs.beans.Comment;
 import bbs.beans.Post;
 import bbs.exception.NoRowsUpdatedRuntimeException;
 import bbs.exception.SQLRuntimeException;
@@ -39,8 +40,6 @@ public class PostDao {
 			ps.setString(2, post.getTitle());
 			ps.setString(3, post.getText());
 			ps.setString(4, post.getCategory());
-
-			System.out.println(ps.toString());
 			
 			ps.executeUpdate();			
 		} catch(SQLException e){
@@ -68,5 +67,28 @@ public class PostDao {
 		}finally{
 			close(ps);
 		}		
+	}
+	
+	public void update(Connection connection, Comment comment){
+		
+		PreparedStatement ps = null;
+		try{
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE postmessage SET ");
+			sql.append(" insert_date = insert_date ,");
+			sql.append(" update_date = CURRENT_TIMESTAMP");
+			sql.append(" WHERE");
+			sql.append(" id = ?;");
+			
+			ps = connection.prepareStatement(sql.toString());			
+			ps.setInt(1, comment.getMessage_id());
+
+			ps.executeUpdate();
+
+		} catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		} finally{
+			close(ps);
+		}
 	}
 }

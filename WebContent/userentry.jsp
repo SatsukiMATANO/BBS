@@ -8,6 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー登録</title>
+<link href="css/BBS.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <div class =main-contents>
@@ -53,7 +55,7 @@
 	<br/>
 	
 	<label for="branch_id">支店</label><br/>
-	<select id="sel1" name="branch_id">
+	<select id="sel1" name="branch_id" class="selectable">
 		<c:forEach items="${branchs}" var="branch" >
 			<option value="${branch.id}"
 			<c:if test="${entryUser.branch_id == branch.id}">
@@ -64,7 +66,7 @@
 	
 	<%-- toDo連動･･･支店別にプルダウン　--%>
 	<label for="department_id">部署・役職</label><br/>
-	<select id="sel2" name="department_id">
+	<select id="sel2" name="department_id" class="selectable">
 		<c:forEach items="${departments}" var="department" >
 			<option value="${department.id}"
 			<c:if test="${entryUser.department_id == department.id}">
@@ -74,7 +76,7 @@
 	</select><br/>
 
 	<br/><input type="submit" value="登録" /><br/><br/>
-	<a href="usermanagement">ユーザー管理へ戻る</a>
+	<a href="usermanagement">ユーザー管理画面へ戻る</a>
 </form>
 </c:if>
 </div>

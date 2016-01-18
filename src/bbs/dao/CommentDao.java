@@ -29,14 +29,43 @@ public class CommentDao {
 			sql.append(",CURRENT_TIMESTAMP"); //insert_d
 			sql.append(",CURRENT_TIMESTAMP"); //update_d
 			sql.append(");");
+
 			
 			ps = connection.prepareStatement(sql.toString());
 			
 			ps.setInt(1, comment.getUser_id());
 			ps.setInt(2, comment.getMessage_id());
 			ps.setString(3, comment.getText());
+
 			
-			ps.executeUpdate();			
+			System.out.println(sql.toString());
+			ps.executeUpdate();
+
+		} catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		} finally{
+			close(ps);
+		}
+	}
+	
+	public void update(Connection connection, Comment comment){
+		
+		PreparedStatement ps = null;
+		try{
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE postmessage SET ");
+			sql.append(" insert_date = insert_date ,");
+			sql.append(" update_date = CURRENT_TIMESTAMP");
+			sql.append(" WHERE");
+			sql.append(" id = ?;");
+			
+			ps = connection.prepareStatement(sql.toString());
+			
+			ps.setInt(1, comment.getMessage_id());
+			
+			System.out.println(sql.toString());
+			ps.executeUpdate();
+
 		} catch(SQLException e){
 			throw new SQLRuntimeException(e);
 		} finally{

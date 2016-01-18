@@ -38,10 +38,12 @@ public class DepartmentDao {
 			try{
 				while (rs.next()){
 					int id = rs.getInt("id");
+					int branch_id = rs.getInt("branch_id");
 					String departmentname = rs.getString("departmentname");
 					
 					Department department = new Department();
 					department.setId(id);
+					department.setBranch_id(branch_id);
 					department.setDepartmentname(departmentname);
 					
 					ret.add(department);

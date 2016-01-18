@@ -32,7 +32,7 @@ public class AccessFilter implements Filter {
     		return;
     	}
 		if(user.getDepartment_id() != 1){
-			messages.add("ユーザー管理画面のアクセスが許可されていません");
+			messages.add("ユーザー管理画面へのアクセスが許可されていません。");
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("./").forward(request, response);
     	}

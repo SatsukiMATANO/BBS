@@ -33,7 +33,7 @@ public class CommentService {
 		}
 	}
 	
-private static final int LIMIT_NUM = 1000;
+	private static final int LIMIT_NUM = 1000;
 	
 	public List<UserComment> getComment(){
 		
@@ -54,7 +54,27 @@ private static final int LIMIT_NUM = 1000;
 			throw e;
 		} finally {
 			close(connection);
-		}
-		
+		}	
 	}
+	
+	public void update(Comment comment) {
+		Connection connection = null;
+		try{
+			connection = getConnection();
+			
+			CommentDao commentDao = new CommentDao();
+			commentDao.update(connection, comment);
+			
+			commit(connection);
+		} catch(RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch(Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 }

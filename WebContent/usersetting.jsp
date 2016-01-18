@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー編集</title>
+<link href="css/BBS.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <div class="main-contents">

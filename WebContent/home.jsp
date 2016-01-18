@@ -8,7 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home</title>
-
+<link href="css/BBS.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+</script>	 
 <script type="text/javascript">
 <!--
 function deleteCheck(){
@@ -27,7 +29,7 @@ function deleteCheck(){
 
 </head>
 <body>
-<div class="mail-contents">
+<div class="main-contents">
 <h3>ホーム</h3>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -39,13 +41,13 @@ function deleteCheck(){
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<div class="header">
 	<c:if test="${ not empty loginUser }">
-		<div Align=right>
+	<div class="header">
 		<c:out value="${loginUser.name}"/>/
-		<a href ="logout">ログアウト</a><br/><br/>
+		<a href ="logout">ログアウト</a><br/>
 		<a href ="usermanagement">ユーザー管理</a><br/>
-		(管理メニューは本社総務部のみが操作可能)<br/></div>
+		(管理メニューは本社総務部のみが操作可能)<br/>
+		</div>
 		<a href ="newpost">新規投稿</a><br/>
 		<form method="get">
 			<label>日付検索
@@ -53,7 +55,7 @@ function deleteCheck(){
 			～
 			<input type="date" value="${end_date}" name="end_date">
 			</label>
-			<label for="s_category">カテゴリー検索</label>
+			<label for="s_category">カテゴリー検索
 			<select name="s_category">				
 				<option value="">=カテゴリーを選択=</option>
 				<c:forEach items="${categorys}" var="cate">
@@ -62,17 +64,17 @@ function deleteCheck(){
 					selected="${cate.category}"</c:if>>
 					<c:out value="${cate.category}"/></option>
 				</c:forEach>
-			</select>
+			</select></label>
 			<input type="submit" value="検索"><br/>
 		</form>
 			<a href="./">全件表示</a>
 	</c:if>
-</div>
+
 
 <c:if test="${ not empty loginUser }">
 <div class="post">
 	<c:forEach items="${posts}" var="post">
-	<hr size=2 color=#999999>
+	<hr size=2 color=#999999 width="100%" align=center>
 		 <div class="post">
 			<div class="title">件名：<c:out value="${post.title}"/>
 			</div>
@@ -100,14 +102,14 @@ function deleteCheck(){
 					<input name="id" type=hidden value="${post.message_id}" id="id"/>
 					<span class="delete">
 					<input name="delete" type="hidden" value="delete" id="delete">
-					<input type="submit" value="削除する">
+					<input class="submit" type="submit" value="削除する">
 					</span>
 				</form>
 				</c:if></c:if>
 		</div>
 	<hr size=1 color=#999999 width="25%" align=left>
 		<div class="comment">
-			<font size="3">◆コメント◆
+			◆コメント◆
 			<c:forEach items="${comments}" var="comment">
 			<c:if test="${post.message_id == comment.message_id }">
 			<div class="name">投稿者：<c:out value="${comment.name}"/></div>
@@ -118,7 +120,7 @@ function deleteCheck(){
 			pattern="yyyy/MM/dd HH:mm:ss" />
 			</div>
 			<hr size=1 color=#999999 width="25%" align=left>
-			</c:if></c:forEach></font>
+			</c:if></c:forEach>
 		</div>
 			
 		<form method ="post">
@@ -131,6 +133,28 @@ function deleteCheck(){
 </div>
 </c:if>
 </div>
+<div id="page-top" class="page-top">
+	<p><a id="move-page-top" class="move-page-top" href="#">ページ上部へ戻る▲</a></p>
+</div>
+
+	<script>
+	$(function(){
+		$("#page-top").hide();
+		$(window).scroll(function(){
+			if($(this).scrollTop() > 400){
+				$("#page-top").fadeIn();
+			} else {
+				$("#page-top").fadeOut();
+			}
+		});
+		$("#page-top a").click(function(){
+			$("body,html").animate({
+				scrollTop:0
+			},700);
+			return false;
+		});
+	});
+	</script>
 
 </body>
 </html>

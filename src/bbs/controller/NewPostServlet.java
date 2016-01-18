@@ -77,22 +77,22 @@ public class NewPostServlet extends HttpServlet {
 		String text = entryPost.getText();
 		
 		if(StringUtils.isEmpty(title) == true){
-			messages.add("件名を入力してください");
+			messages.add("件名を入力してください。");
 		}
 		if (title.length() > 50){
-			messages.add("件名は50文字以下で入力してください");
+			messages.add("件名は50文字以下で入力してください。");
 		}
 		if(StringUtils.isEmpty(category) == true){
-			messages.add("カテゴリーを入力してください");
+			messages.add("カテゴリーを入力してください。");
 		}
 		if (category.length() > 10){
-			messages.add("カテゴリーは10文字以下で入力してください");
+			messages.add("カテゴリーは10文字以下で入力してください。");
 		}
 		if(StringUtils.isEmpty(text) == true){
-			messages.add("本文を入力してください");
+			messages.add("本文を入力してください。");
 		}
 		if (text.length() > 1000){
-			messages.add("本文は1000文字以下で入力してください");
+			messages.add("本文は1000文字以下で入力してください。");
 		}
 		
 		if(messages.size() == 0){

@@ -82,6 +82,7 @@ public class HomeServlet extends HttpServlet {
 				comment.setMessage_id(Integer.parseInt(request.getParameter("message_id")));
 				
 				new CommentService().register(comment);
+				new CommentService().update(comment);
 				
 				response.sendRedirect("./");
 			}else {
@@ -121,10 +122,10 @@ public class HomeServlet extends HttpServlet {
 		String text = entryComment.getText();
 		
 		if(StringUtils.isEmpty(text) == true){
-			messages.add("コメントが入力されていません");
+			messages.add("コメントが入力されていません。");
 		}
 		if (text.length() > 500){
-			messages.add("コメントは500文字以下で入力してください");
+			messages.add("コメントは500文字以下で入力してください。");
 		}
 		
 		if(messages.size() == 0){
