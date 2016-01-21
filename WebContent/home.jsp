@@ -6,13 +6,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home</title>
 <link href="css/BBS.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/
+	themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
-</script>	 
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
-<!--
 function deleteCheck(){
 	if(window.confirm('この投稿を削除しますか？\n※削除した投稿は元にもどせません')){
 		
@@ -24,7 +28,6 @@ function deleteCheck(){
 		return false;
 	}
 }
-// -->
 </script>
 
 </head>
@@ -51,9 +54,9 @@ function deleteCheck(){
 		<a href ="newpost">新規投稿</a><br/>
 		<form method="get">
 			<label>日付検索
-			<input type="date" value="${start_date}" name="start_date">
+			<input type="date" id="datepicker1" value="${start_date}" name="start_date">
 			～
-			<input type="date" value="${end_date}" name="end_date">
+			<input type="date" id="datepicker2" value="${end_date}" name="end_date">
 			</label>
 			<label for="s_category">カテゴリー検索
 			<select name="s_category">				
@@ -155,6 +158,5 @@ function deleteCheck(){
 		});
 	});
 	</script>
-
 </body>
 </html>

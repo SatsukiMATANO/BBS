@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		List<UserComment> comment = new CommentService().getComment();
-		List<Category> categorys = new PostService().getCategory();	
+		List<Category> categorys = new PostService().getCategory();
 		
 		String start_date = "2016-01-01"; //デフォルト
 		String end_date = "2100-12-31";
@@ -58,7 +58,7 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("posts", post);
 		request.setAttribute("categorys", categorys);
 		request.setAttribute("comments", comment);
-		request.getRequestDispatcher("./home.jsp").forward(request, response);
+		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	@Override
