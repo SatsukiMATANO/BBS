@@ -19,26 +19,24 @@ import bbs.service.UserService;
 @WebServlet(urlPatterns={"/usermanagement"})
 public class UserManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    @Override
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
- 
-    	List<User> users = new UserService().allUser();
-    	List<Branch> branchs = new BranchService().getBranch();
-    	List<Department> departments = new DepartmentService().getDepartment();
-    	
-    	request.setAttribute("branchs", branchs);
-    	request.setAttribute("departments", departments);
-    	request.setAttribute("users", users);
-    	request.getRequestDispatcher("usermanagement.jsp").forward(request, response);	
+		List<User> users = new UserService().allUser();
+		List<Branch> branchs = new BranchService().getBranch();
+		List<Department> departments = new DepartmentService().getDepartment();
+		request.setAttribute("branchs", branchs);
+		request.setAttribute("departments", departments);
+		request.setAttribute("users", users);
+		request.getRequestDispatcher("usermanagement.jsp").forward(request, response);
 	}
 
-    
-    @Override
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-   	
+
 		User editUser = new User();
 
 		if(request.getParameter("stoped") != null){
@@ -49,7 +47,7 @@ public class UserManagementServlet extends HttpServlet {
 				new UserService().statusUpdate(editUser);
 				response.sendRedirect("./usermanagement");
 			}
-			if(stoped == 1){		
+			if(stoped == 1){
 				editUser.setId(Integer.parseInt(request.getParameter("id")));
 				editUser.setStoped(1);
 				new UserService().statusUpdate(editUser);

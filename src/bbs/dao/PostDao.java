@@ -41,7 +41,7 @@ public class PostDao {
 			ps.setString(3, post.getText());
 			ps.setString(4, post.getCategory());
 			
-			ps.executeUpdate();			
+			ps.executeUpdate();
 		} catch(SQLException e){
 			throw new SQLRuntimeException(e);
 		} finally{
@@ -66,7 +66,7 @@ public class PostDao {
 			throw new SQLRuntimeException(e);
 		}finally{
 			close(ps);
-		}		
+		}
 	}
 	
 	public void update(Connection connection, Comment comment){
@@ -80,7 +80,7 @@ public class PostDao {
 			sql.append(" WHERE");
 			sql.append(" id = ?;");
 			
-			ps = connection.prepareStatement(sql.toString());			
+			ps = connection.prepareStatement(sql.toString());
 			ps.setInt(1, comment.getMessage_id());
 
 			ps.executeUpdate();

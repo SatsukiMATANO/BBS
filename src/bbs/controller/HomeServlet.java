@@ -21,11 +21,12 @@ import bbs.beans.UserComment;
 import bbs.beans.UserPost;
 import bbs.service.CommentService;
 import bbs.service.PostService;
+import bbs.service.UserService;
 
 @WebServlet(urlPatterns = {"/index.jsp"})
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -53,12 +54,13 @@ public class HomeServlet extends HttpServlet {
 		List<UserPost> post =
 				new PostService().getDatePost(start_date, end_date, select_cate);
 		
-		User user = (User) session.getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute("loginUser");
+		User user = new UserService().getUser(loginUser.getId());
 		request.setAttribute("loginUser", user);
 		request.setAttribute("posts", post);
 		request.setAttribute("categorys", categorys);
 		request.setAttribute("comments", comment);
-		request.getRequestDispatcher("home.jsp").forward(request, response);
+		request.getRequestDispatcher("./home.jsp").forward(request, response);
 	}
 
 	@Override
@@ -109,7 +111,7 @@ public class HomeServlet extends HttpServlet {
 		}
 	}
 	
-	private Comment getEntryComment(HttpServletRequest request) 
+	private Comment getEntryComment(HttpServletRequest request)
 			throws IOException, ServletException{
 		
 		Comment entryComment = new Comment();

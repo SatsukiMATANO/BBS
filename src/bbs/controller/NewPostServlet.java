@@ -24,7 +24,7 @@ public class NewPostServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-    		request.getRequestDispatcher("newpost.jsp").forward(request, response);
+		request.getRequestDispatcher("newpost.jsp").forward(request, response);
 	}
 
 
@@ -52,7 +52,7 @@ public class NewPostServlet extends HttpServlet {
 			new PostService().register(post);
 			
 			response.sendRedirect("./");
-		}else {			
+		}else {
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("newpost.jsp").forward(request, response);
 		}

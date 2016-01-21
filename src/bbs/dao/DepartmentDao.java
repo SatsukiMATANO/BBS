@@ -47,7 +47,7 @@ public class DepartmentDao {
 					department.setDepartmentname(departmentname);
 					
 					ret.add(department);
-				}	
+				}
 				return ret;
 			} finally{
 				close(rs);

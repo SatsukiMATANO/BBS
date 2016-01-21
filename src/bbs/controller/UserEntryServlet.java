@@ -24,22 +24,22 @@ import bbs.service.UserService;
 public class UserEntryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    @Override
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
  
-    	List<Branch> branchs = new BranchService().getBranch();
-    	List<Department> departments = new DepartmentService().getDepartment();
-    	
-    	request.setAttribute("branchs", branchs);
-    	request.setAttribute("departments", departments);
-    	request.getRequestDispatcher("userentry.jsp").forward(request, response);
+		List<Branch> branchs = new BranchService().getBranch();
+		List<Department> departments = new DepartmentService().getDepartment();
+		
+		request.setAttribute("branchs", branchs);
+		request.setAttribute("departments", departments);
+		request.getRequestDispatcher("userentry.jsp").forward(request, response);
 	}
 
-    @Override
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-    	response.setContentType("text/html; charset=utf-8");
+		response.setContentType("text/html; charset=utf-8");
 
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
@@ -47,23 +47,23 @@ public class UserEntryServlet extends HttpServlet {
 		User entryUser = getEntryUser(request);
 		request.setAttribute("entryUser", entryUser);
 
-		if (isValid(entryUser, messages) == true) {			
+		if (isValid(entryUser, messages) == true) {
 			new UserService().register(entryUser);
 			response.sendRedirect("./usermanagement"); //管理画面へ戻る
 			
 		} else {
 			
 			List<Branch> branchs = new BranchService().getBranch();
-	    	List<Department> departments = new DepartmentService().getDepartment();
+			List<Department> departments = new DepartmentService().getDepartment();
 
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("branchs", branchs);
-	    	request.setAttribute("departments", departments);
-	    	request.getRequestDispatcher("userentry.jsp").forward(request, response);
+			request.setAttribute("departments", departments);
+			request.getRequestDispatcher("userentry.jsp").forward(request, response);
 		}
 	}
 
-    	private User getEntryUser(HttpServletRequest request)
+	private User getEntryUser(HttpServletRequest request)
 		throws IOException, ServletException{
 
 		User entryUser =  new User();

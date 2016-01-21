@@ -213,7 +213,7 @@ public class UserDao {
 			throw new SQLRuntimeException(e);
 		}finally{
 			close(ps);
-		}		
+		}
 	}
 
 	public User getUser(Connection connection, int id) {

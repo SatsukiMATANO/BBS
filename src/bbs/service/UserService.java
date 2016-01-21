@@ -46,12 +46,11 @@ public class UserService {
 			connection = getConnection();
 
 			if(StringUtil.isEmpty(user.getPassword()) == false){
-			String encPassword = CipherUtil.encrypt(user.getPassword());
-			user.setPassword(encPassword);
+				String encPassword = CipherUtil.encrypt(user.getPassword());
+				user.setPassword(encPassword);
 			}
 
 			UserDao userDao = new UserDao();
-			
 			userDao.upDate(connection, user);
 
 			commit(connection);

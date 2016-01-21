@@ -31,14 +31,14 @@ public class LoginFilter implements Filter {
 		//loginサーブレットはフィルターを除外する
 		if(!method.equals("login") && !method.equals("BBS.css")){
 			HttpSession session = ((HttpServletRequest)request).getSession();
-	    	User loginUser = (User) session.getAttribute("loginUser");
-
-	    	if(loginUser == null){
-	    		((HttpServletResponse)response).sendRedirect("./login");	    		
-	    		return;
-	    	}
+			User loginUser = (User) session.getAttribute("loginUser");
+		
+			if(loginUser == null){
+				((HttpServletResponse)response).sendRedirect("./login");
+				return;
+			}
 		}
-		    	
+
 		chain.doFilter(request, response);
 	}
 

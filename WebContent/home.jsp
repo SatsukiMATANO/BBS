@@ -10,12 +10,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home</title>
 <link href="css/BBS.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/
 	themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+<script type="text/javascript" src="./js/modernizr-custom.js"></script>
 <script type="text/javascript">
 function deleteCheck(){
 	if(window.confirm('この投稿を削除しますか？\n※削除した投稿は元にもどせません')){
@@ -131,7 +132,7 @@ function deleteCheck(){
 			<label for="text">コメント</label><font size=2>(500文字以下)</font><br/>
 			<textarea name="text" cols="50" rows="5" class="text-box"><c:out value="${entryComment.text}"/></textarea><br/>
 			<input type="submit" value="コメントする">
-		</form>		
+		</form>
 	</c:forEach>
 </div>
 </c:if>
@@ -140,23 +141,32 @@ function deleteCheck(){
 	<p><a id="move-page-top" class="move-page-top" href="#">ページ上部へ戻る▲</a></p>
 </div>
 
-	<script>
-	$(function(){
-		$("#page-top").hide();
-		$(window).scroll(function(){
-			if($(this).scrollTop() > 400){
-				$("#page-top").fadeIn();
-			} else {
-				$("#page-top").fadeOut();
-			}
-		});
-		$("#page-top a").click(function(){
-			$("body,html").animate({
-				scrollTop:0
-			},700);
-			return false;
-		});
+<script>
+$(function(){
+	$("#page-top").hide();
+	$(window).scroll(function(){
+		if($(this).scrollTop() > 400){
+			$("#page-top").fadeIn();
+		} else {
+			$("#page-top").fadeOut();
+		}
 	});
-	</script>
+	$("#page-top a").click(function(){
+		$("body,html").animate({
+			scrollTop:0
+		},700);
+		return false;
+	});
+});
+</script>
+<script>
+
+	if( !Modernizr.inputtypes.date ) {
+	  $('input[type=date]').datepicker({
+	    dateFormat: 'yy-mm-dd',
+	  });
+	}
+
+</script>
 </body>
 </html>

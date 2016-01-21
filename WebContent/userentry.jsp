@@ -63,7 +63,7 @@
 			${branch.branchname}</option>
 		</c:forEach>
 	</select><br/>
-	
+
 	<%-- toDo連動･･･支店別にプルダウン　--%>
 	<label for="department_id">部署・役職</label><br/>
 	<select id="sel2" name="department_id" class="selectable">

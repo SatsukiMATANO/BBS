@@ -23,7 +23,7 @@ import bbs.service.UserService;
 @WebServlet(urlPatterns={"/usersetting"})
 public class UserSettingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -62,6 +62,7 @@ public class UserSettingServlet extends HttpServlet {
 		User editUser = getEditUser(request);
 		request.setAttribute("editUser", editUser);
 
+
 		if (isValid(editUser, messages) == true) {
 
 			new UserService().upDate(editUser);
@@ -70,16 +71,16 @@ public class UserSettingServlet extends HttpServlet {
 		} else {
 			
 			List<Branch> branchs = new BranchService().getBranch();
-	    	List<Department> departments = new DepartmentService().getDepartment();
+			List<Department> departments = new DepartmentService().getDepartment();
 
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("branchs", branchs);
-	    	request.setAttribute("departments", departments);
-	    	request.getRequestDispatcher("usersetting.jsp").forward(request, response);
+			request.setAttribute("departments", departments);
+			request.getRequestDispatcher("usersetting.jsp").forward(request, response);
 		}
 	}
 
-    	private User getEditUser(HttpServletRequest request)
+	private User getEditUser(HttpServletRequest request)
 		throws IOException, ServletException{
 
 		User editUser =  new User();
@@ -125,8 +126,6 @@ public class UserSettingServlet extends HttpServlet {
 				messages.add("ログインIDは6文字以上で入力してください。");
 			}
 			
-			System.out.println("check" + check.getLogin_id());
-			System.out.println("edit" + login_id);
 			if(!check.getLogin_id().equals(login_id)){
 				if (checkLoginId != null){
 					messages.add("すでに登録されているログインIDを入力しています。"

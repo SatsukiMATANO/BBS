@@ -24,18 +24,20 @@ public class AccessFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		List<String> messages = new ArrayList<String>();
-    	HttpSession session = ((HttpServletRequest)request).getSession();
-    	
-    	User user = (User) session.getAttribute("loginUser");
-    	if(user == null ){
-    		((HttpServletResponse)response).sendRedirect("./login");
-    		return;
-    	}
-		if(user.getDepartment_id() != 1){
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		
+		if(loginUser == null ){
+			((HttpServletResponse)response).sendRedirect("./login");
+			return;
+		}
+		
+		if(loginUser.getDepartment_id() != 1 || loginUser.getBranch_id() != 1){
 			messages.add("ユーザー管理画面へのアクセスが許可されていません。");
 			session.setAttribute("errorMessages", messages);
-			request.getRequestDispatcher("./").forward(request, response);
-    	}
+			((HttpServletResponse)response).sendRedirect("./");
+			return;
+		}
 
 		chain.doFilter(request, response);
 	}

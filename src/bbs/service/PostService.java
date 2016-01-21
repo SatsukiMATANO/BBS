@@ -124,7 +124,7 @@ public class PostService {
 			throw e;
 		} finally {
 			close(connection);
-		}		
+		}
 	}
 
 }

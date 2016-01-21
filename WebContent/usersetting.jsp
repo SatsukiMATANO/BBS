@@ -8,7 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー編集</title>
 <link href="css/BBS.css" rel="stylesheet" type="text/css">
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js">
+</script>
 </head>
 <body>
 <div class="main-contents">
@@ -51,7 +52,9 @@
 	<input name="passwordcheck" type="password" id="passwordcheck"/><br />
 	
 		<label for="branch_id">支店</label><br/>
-	<select name="branch_id">
+		<c:if test="${editUser.id == 1}">
+		<input name="branch_id" type=hidden value="1" id="branch_id"/></c:if>
+	<select id="branch" name="branch_id">
 		<c:forEach items="${branchs}" var="branch" >
 			<option value="${branch.id}"
 			<c:if test="${editUser.branch_id == branch.id}">
@@ -60,10 +63,11 @@
 		</c:forEach>
 
 	</select><br/>
-	
-	<%-- toDo連動･･･支店別にプルダウン　--%>
+
 	<label for="department_id">部署・役職</label><br/>
-	<select name="department_id">
+	<c:if test="${editUser.id == 1}">
+		<input name="department_id" type=hidden value="1" id="department_id"/></c:if>
+	<select id="department" name="department_id">
 		<c:forEach items="${departments}" var="department" >
 			<option value="${department.id}"
 			<c:if test="${editUser.department_id == department.id}">
@@ -79,5 +83,17 @@
 <a href=usermanagement>ユーザー管理画面へ戻る</a>
 </c:if>
 </div>
+<script>
+$(function(){
+	if("${editUser.id}" == "${loginUser.id}"
+			|| "${editUser.id}" == "1"){
+		$("select").attr("disabled","disabled");
+	}else{
+		$("select").removeAttr("disabled");
+	}
+});
+
+</script>
+
 </body>
 </html>
