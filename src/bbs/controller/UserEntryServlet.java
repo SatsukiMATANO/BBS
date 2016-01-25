@@ -47,7 +47,7 @@ public class UserEntryServlet extends HttpServlet {
 		User entryUser = getEntryUser(request);
 		request.setAttribute("entryUser", entryUser);
 
-		if (isValid(entryUser, messages) == true) {
+		if (isValid(request, entryUser, messages) == true) {
 			new UserService().register(entryUser);
 			response.sendRedirect("./usermanagement"); //管理画面へ戻る
 			
@@ -72,16 +72,22 @@ public class UserEntryServlet extends HttpServlet {
 		entryUser.setPassword(request.getParameter("password"));
 		entryUser.setPasswordcheck(request.getParameter("passwordcheck"));
 		entryUser.setName(request.getParameter("name"));
-		entryUser.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		entryUser.setDepartment_id(Integer.parseInt(request.getParameter("department_id")));
+		String branch_id = request.getParameter("branch_id");
+		String department_id = request.getParameter("department_id");
+		if(branch_id != null && department_id != null){
+			entryUser.setBranch_id(Integer.parseInt(branch_id));
+			entryUser.setDepartment_id(Integer.parseInt(department_id));
+		}
 		return entryUser;
 	}
 	
-	private boolean isValid(User entryUser, List<String> messages) {
+	private boolean isValid(HttpServletRequest req, User entryUser, List<String> messages) {
 		String name = entryUser.getName();
 		String login_id = entryUser.getLogin_id();
 		String password = entryUser.getPassword();
 		String passwordcheck = entryUser.getPasswordcheck();
+		String branch_id = req.getParameter("branch_id");
+		String department_id = req.getParameter("department_id");
 		
 		List<User> checkLoginId = new UserService().checkLoginId(login_id);
 		
@@ -105,8 +111,7 @@ public class UserEntryServlet extends HttpServlet {
 				messages.add("ログインIDは6文字以上で入力してください。");
 			}
 			if (checkLoginId != null){
-				messages.add("すでに登録されているログインIDを入力しています。"
-						+ "異なるログインIDを入力してください。");
+				messages.add("ログインIDが使用されています。");
 			}
 
 		}
@@ -125,12 +130,19 @@ public class UserEntryServlet extends HttpServlet {
 			}
 		}
 		if (StringUtils.isEmpty(passwordcheck) == true){
-			messages.add("確認用のパスワードを入力してください。");
+			messages.add("パスワードの確認を入力してください。");
+		} else if (!passwordcheck.equals(password)){
+			messages.add("パスワードの確認がパスワードと異なります。再度入力してください。");
 		}
-		if (!passwordcheck.equals(password)){
-			messages.add("確認用のパスワードがパスワードと異なります。再度入力してください。");
+		if (branch_id.equals("99")){
+			messages.add("支店を選択してください。");
 		}
-		
+		if (department_id == null){
+			messages.add("部署・役職を選択してください。");
+		} else if (department_id.equals("99")){
+			messages.add("部署・役職を選択してください。");
+		}
+			
 
 		if (messages.size() == 0) {
 			return true;

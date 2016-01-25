@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="main-contents">
-<h3>新規投稿</h3>
+<h1>新規投稿</h1>
 <c:if test="${ not empty loginUser }">
 <c:if test="${not empty errorMessages}">
 	<div class="errorMessages">
@@ -27,15 +27,15 @@
 </c:if>
 
 <form action="newpost" method ="post">
-		<label for="title">件名</label><font size=2>(50文字以下)</font><br/>
-		<input name="title" value="${entryPost.title}" id="title"/><br/>
-		
-		<label for="category">カテゴリー</label><font size=2>(10文字以下)</font>
-		<br/>
-		<input name="category" value="${entryPost.category}" id="category"/><br/>
-		
-		<label for="text">本文</label><font size=2>(1000文字以下)</font><br/>
-		<textarea name="text" cols="50" rows="10" class="text-box"><c:out value="${entryPost.text}"/></textarea><br/>
+		<label for="title">件名</label>
+			<font color="red" size=2>※(50文字以下)</font><br/>
+			<input name="title" value="${entryPost.title}" id="title"/><br/>
+		<label for="category">カテゴリー</label>
+			<font color="red" size=2>※(10文字以下)</font><br/>
+			<input name="category" value="${entryPost.category}" id="category"/><br/>
+		<label for="text">本文</label>
+			<font color="red" size=2>※(1000文字以下)</font><br/>
+			<textarea name="text" cols="50" rows="10" class="text-box"><c:out value="${entryPost.text}"/></textarea><br/>
 		
 		<br/><input type="submit" value="投稿する">
 	</form>

@@ -44,9 +44,10 @@ function deleteCheck(){
 <body>
 <div class="main-contents">
 <c:if test="${ not empty loginUser }">
-<h3>ユーザー管理</h3>
+<h1>ユーザー管理</h1>
+	
 	<a href="userentry">ユーザー新規登録</a><br/>
-	<a href="./">ホームへ戻る</a><br/><br/>
+	<a href="./">ホームへ戻る</a><br/>
 	<font color = grey><font size = 2>
 	<br/>社員氏名を選択すると該当ユーザーの情報編集画面へ遷移します。<br/>
 	</font></font>

@@ -128,8 +128,7 @@ public class UserSettingServlet extends HttpServlet {
 			
 			if(!check.getLogin_id().equals(login_id)){
 				if (checkLoginId != null){
-					messages.add("すでに登録されているログインIDを入力しています。"
-							+ "異なるログインIDを入力してください。");
+					messages.add("ログインIDが使用されています。");
 				}
 			}
 		}
@@ -146,12 +145,12 @@ public class UserSettingServlet extends HttpServlet {
 			}
 			
 			if(StringUtils.isEmpty(passwordcheck) == true){
-				messages.add("確認用のパスワードを入力してください。");
+				messages.add("パスワードの確認を入力してください。");
 			}
 			
 			if (StringUtils.isEmpty(passwordcheck) == false){
 				if (!passwordcheck.equals(password)){
-					messages.add("確認用のパスワードがパスワードと異なります。再度入力してください。");
+					messages.add("パスワードの確認がパスワードと異なります。再度入力してください。");
 				}
 			}
 		}
